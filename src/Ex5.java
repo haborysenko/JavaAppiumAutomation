@@ -12,6 +12,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class Ex5 {
 
     private AppiumDriver driver;
@@ -186,7 +189,33 @@ public class Ex5 {
         Assert.assertTrue(
                 "Incorrect amount after delete",
                 amount_of_search_results_after_delete == 1);
+
+        //3. Open article that is left and verify title
+        // click to open article
+        waitForElementAndClick(
+                By.xpath("//*[@text='" + titels.get(1) + "']"),
+                "Cannot find element with text " + titels.get(1),
+                30
+        );
+
+        // get for title of opened article text attribute
+         String article_title = waitForElementAndGetAttribute(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                 "text",
+                 "Cannot find article title",
+                 30
+        );
+
+        // verify that titels are the same
+         Assert.assertEquals(
+                 "Titles are not the same",
+                 article_title,
+                 titels.get(1)
+         );
     }
+
+
+
 
     //METHODS
     /*
