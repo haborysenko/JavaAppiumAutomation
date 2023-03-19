@@ -313,7 +313,6 @@ public class FirstTest {
         Assert.assertTrue(
                 "We found too few results",
                 amount_of_search_results>0);
-
     }
 
     @Test
