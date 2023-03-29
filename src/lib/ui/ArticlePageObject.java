@@ -16,26 +16,32 @@ public class ArticlePageObject extends MainPageObject {
             MY_LIST_OK_BUTTON = "//*[@text='OK']",
             CLOSE_ARTICLE_BUTTON = "//android.widget.ImageButton[@content-desc='Navigate up']";
 
-
     public ArticlePageObject(AppiumDriver driver) {
 
         super(driver);
     }
 
     public WebElement waitForTitleElement() {
-        return this.waitForElementPresent(By.id(TITLE), "Cannot find article title on page", 30);
+        return this.waitForElementPresent(
+                By.id(TITLE),
+                "Cannot find article title on page",
+                30);
     }
 
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
-        return title_element.getAttribute("text");
+        return title_element.getAttribute(
+                "text");
     }
 
     public void swipeToFooter() {
-        this.swipeUpToFindElement(By.xpath(FOOTER_ELEMENT),"Cannot find the end of articles while swipe", 20);
+        this.swipeUpToFindElement(
+                By.xpath(FOOTER_ELEMENT),
+                "Cannot find the end of articles while swipe",
+                20);
     }
 
-    public void addArticleToMyList(String name_of_folder) {
+    public void addArticleToMyNewList(String name_of_folder) {
         //more options
         this.waitForElementAndClick(
                 By.xpath(OPTIONS_BUTTON),
@@ -45,7 +51,6 @@ public class ArticlePageObject extends MainPageObject {
 
         //click to add to reading list
         this.waitForElementAndClick(
-                //By.xpath("//*[@text='Add to reading list']"),
                 By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
                 "Cannot find option to add article to reading list",
                 30
@@ -80,6 +85,26 @@ public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    public void addArticleToMyExistingList(String name_of_existing_folder) {
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_BUTTON),
+                "Cannot find button to open article options",
+                30
+        );
+
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                "Cannot find option to add article to reading list",
+                30
+        );
+
+        this.waitForElementAndClick(
+                By.xpath("//*[@text='" + name_of_existing_folder + "']"),
+                "Cannot find " + name_of_existing_folder,
+                30
+        );
+    }
+
      public void closeArticle() {
          this.waitForElementAndClick(
                  By.xpath(CLOSE_ARTICLE_BUTTON),
@@ -87,4 +112,10 @@ public class ArticlePageObject extends MainPageObject {
                  30
          );
      }
+
+    public void assertThereIsTitleOfArticle() {
+        this.assertElementPresent(
+                By.id(TITLE),
+                "Title of article is not found");
+    }
 }

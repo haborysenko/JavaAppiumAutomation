@@ -39,7 +39,7 @@ public class ChangeAppConditionTests extends CoreTestCase {
     }
 
     @Test
-    public void testCheckSerachArticleInBackground() {
+    public void testCheckSearchArticleInBackground() {
         String search_line = "Java";
         String article_text_to_wait_for = "Object-oriented programming language";
 
