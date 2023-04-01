@@ -21,6 +21,7 @@ public class SearchPageObject extends MainPageObject{
         SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results found']";
 
     public SearchPageObject(AppiumDriver driver) {
+
         super(driver);
     }
 

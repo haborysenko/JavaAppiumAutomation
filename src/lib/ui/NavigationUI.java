@@ -10,6 +10,7 @@ public class NavigationUI extends MainPageObject{
 
 
     public NavigationUI(AppiumDriver driver) {
+
         super(driver);
     }
 

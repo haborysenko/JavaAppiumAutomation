@@ -12,6 +12,7 @@ public class MyListsPageObject extends MainPageObject {
             ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title";
 
     public MyListsPageObject(AppiumDriver driver) {
+
         super(driver);
     }
 
