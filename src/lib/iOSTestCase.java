@@ -1,13 +1,8 @@
 package lib;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import junit.framework.TestCase;
-import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.net.URL;
-import java.time.Duration;
 
 public class iOSTestCase extends TestCase {
 
