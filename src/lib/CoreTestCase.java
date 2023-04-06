@@ -6,6 +6,7 @@ import junit.framework.TestCase;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.URL;
+import java.time.Duration;
 
 public class CoreTestCase extends TestCase {
 
@@ -25,7 +26,7 @@ public class CoreTestCase extends TestCase {
         capabilities.setCapability("automationName", "Appium");
         capabilities.setCapability("appPackage", "org.wikipedia");
         capabilities.setCapability("appActivity", ".main.MainActivity");
-        capabilities.setCapability("app", "/Users/halynab/Desktop/JavaAppiumAutomation/apks/org.wikipedia.apk");
+        capabilities.setCapability("app", "/Users/halynab/courses/JavaAppiumAutomation/apks/org.wikipedia.apk");
         capabilities.setCapability("orientation", "PORTRAIT");
 
         driver = new AndroidDriver(new URL(AppiumURL), capabilities);
@@ -41,14 +42,17 @@ public class CoreTestCase extends TestCase {
     }
 
     protected void rotateScreenPortrait() {
+
         driver.rotate(ScreenOrientation.PORTRAIT);
     }
 
     protected void rotateScreenLandscape() {
+
         driver.rotate(ScreenOrientation.LANDSCAPE);
     }
 
     protected void  backgroundApp(int seconds) {
-        driver.runAppInBackground(seconds);
+
+        driver.runAppInBackground(Duration.ofSeconds(seconds));
     }
 }

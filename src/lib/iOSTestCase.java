@@ -20,6 +20,7 @@ public class iOSTestCase extends TestCase {
         capabilities.setCapability("deviceName", "iPhone 14");
         capabilities.setCapability("platformVersion", "16.4");
         capabilities.setCapability("app", "/Users/halynab/courses/JavaAppiumAutomation/apks/Wikipedia.app");
+        capabilities.setCapability("automationName", "XCUITest");
     }
 
     @Override
