@@ -1,17 +1,17 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 
 public class WelcomePageObject extends MainPageObject {
 
     private static final String
-            STEP_LEARN_MORE_ABOUT_WIKIPEDIA_LINK = "//XCUIElementTypeStaticText[@name=\"Узнать подробнее о Википедии\"]",
-            STEP_NEW_WAYS_TO_EXPLORE_TITLE = "Новые способы изучения",
-            STEP_ADD_OR_EDIT_PREFERRED_LANGS_LINK = "//XCUIElementTypeStaticText[@name=\"Добавить или изменить предпочтительные языки\"]",
-            STEP_LEARN_MORE_ABOUT_DATE_COLLECTED_LINK = "//XCUIElementTypeStaticText[@name=\"Узнать подробнее о сборе данных\"]",
-            NEXT_LINK = "//XCUIElementTypeStaticText[@name=\"Далее\"]",
-            GET_STARTED_BUTTON = "//XCUIElementTypeStaticText[@name=\"Начать\"]";
+            STEP_LEARN_MORE_ABOUT_WIKIPEDIA_LINK = "xpath://XCUIElementTypeStaticText[@name='Learn more about Wikipedia']",
+            STEP_FREE_ENCYCLOPEDIA = "id:The free encyclopedia",
+            STEP_NEW_WAYS_TO_EXPLORE_TITLE = "id:New ways to explore",
+            STEP_ADD_OR_EDIT_PREFERRED_LANGS_LINK = "xpath://XCUIElementTypeStaticText[@name='Add or edit preferred languages']",
+            STEP_LEARN_MORE_ABOUT_DATE_COLLECTED_LINK = "xpath://XCUIElementTypeStaticText[@name='Learn more about data collected']",
+            NEXT_LINK = "xpath://XCUIElementTypeButton[@name='Next']",
+            GET_STARTED_BUTTON = "xpath://XCUIElementTypeButton[@name='Get started']";
 
     public WelcomePageObject(AppiumDriver driver)
     {
@@ -20,43 +20,54 @@ public class WelcomePageObject extends MainPageObject {
 
     public void waitForLearnMoreLink() {
         this.waitForElementPresent(
-                By.xpath(STEP_LEARN_MORE_ABOUT_WIKIPEDIA_LINK),
-                "Cannot find element 'Узнать подробнее о Википедии'"
+                STEP_LEARN_MORE_ABOUT_WIKIPEDIA_LINK,
+                "Cannot find element 'Learn more about Wikipedia'"
         );
     }
 
     public void waitForNewWaysToExploreText() {
         this.waitForElementPresent(
-                By.id(STEP_NEW_WAYS_TO_EXPLORE_TITLE),
-                "Cannot find element 'Новые способы изучения'"
+                STEP_NEW_WAYS_TO_EXPLORE_TITLE,
+                "Cannot find element 'New ways to explore'"
         );
     }
 
     public void waitForAddOrEditPreferredLangsLink() {
         this.waitForElementPresent(
-                By.id(STEP_ADD_OR_EDIT_PREFERRED_LANGS_LINK),
-                "Cannot find element 'Добавить или изменить предпочтительные языки'"
+                STEP_ADD_OR_EDIT_PREFERRED_LANGS_LINK,
+                "Cannot find element 'Add or edit preferred languages'"
         );
     }
 
     public void waitForAboutDataCollectedLink() {
         this.waitForElementPresent(
-                By.id(STEP_LEARN_MORE_ABOUT_DATE_COLLECTED_LINK),
-                "Cannot find element 'Узнать подробнее о сборе данных'"
+                STEP_LEARN_MORE_ABOUT_DATE_COLLECTED_LINK,
+                "Cannot find element 'Learn more about data collected'"
+        );
+    }
+
+    public void waitForFreeEncyclopedia() {
+        this.waitForElementPresent(
+                STEP_FREE_ENCYCLOPEDIA,
+                "Cannot find element 'The free encyclopedia'"
         );
     }
 
     public void clickNextButton() {
         this.waitForElementAndClick(
-                By.xpath(NEXT_LINK),
-                "Cannot find button 'Далее"
+                NEXT_LINK,
+                "Cannot find button 'Next'"
         );
     }
 
     public void clickGetStartedButton() {
         this.waitForElementAndClick(
-                By.xpath(GET_STARTED_BUTTON),
-                "Cannot find button 'Далее"
+                GET_STARTED_BUTTON,
+                "Cannot find button 'Get started'"
         );
+    }
+
+    public void tapNextButtonByCoordinate() {
+        this.tapByCoordinate(290,755);
     }
 }

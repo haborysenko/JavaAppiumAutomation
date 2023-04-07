@@ -1,15 +1,14 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 import java.util.List;
 
 public class MyListsPageObject extends MainPageObject {
 
     private static final String
-            FOLDER_BY_NAME_TPL = "//*[@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']",
-            ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title";
+            FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']",
+            ARTICLE_BY_TITLE_TPL = "xpath://*[@text='{TITLE}']",
+            ARTICLE_TITLE = "id:org.wikipedia:id/page_list_item_title";
 
     public MyListsPageObject(AppiumDriver driver) {
 
@@ -29,7 +28,7 @@ public class MyListsPageObject extends MainPageObject {
     public void openFolderByName(String folder_name) {
         String folder_name_xpath = getFolderXpathByName(folder_name);
         this.waitForElementAndClick(
-                By.xpath(folder_name_xpath),
+                folder_name_xpath,
                 "Cannot find folder by name " + folder_name,
                 30
         );
@@ -38,14 +37,14 @@ public class MyListsPageObject extends MainPageObject {
     public void waitForArticleToAppearByTitle(String article_title) {
         String article_title_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementPresent(
-                By.xpath(article_title_xpath),
+                article_title_xpath,
                 "Cannot find saved article by title " + article_title
         );
     }
 
     public List<String> getArticleTitlesFromMyList() {
         return this.waitForElementsAndGetAttribute(
-                By.id(ARTICLE_TITLE),
+                ARTICLE_TITLE,
                 "text",
                 "Cannot get article title attribute",
                 30);
@@ -54,21 +53,21 @@ public class MyListsPageObject extends MainPageObject {
     public int getAmountOfFoundArticles() {
         //wait till at leas one is shown
         this.waitForElementPresent(
-                By.id(ARTICLE_TITLE),
+                ARTICLE_TITLE,
                 "Cannot find anything",
                 15
         );
 
         //get amount of elements
         return this.getAmountOfElements(
-                By.id(ARTICLE_TITLE)
+                ARTICLE_TITLE
         );
     }
 
     public void waitForArticleToDisappearByTitle(String article_title) {
         String article_title_xpath = getFolderXpathByName(article_title);
         this.waitForElementNotPresent(
-                By.xpath(article_title_xpath),
+                article_title_xpath,
                 "Cannot delete saved article with title " + article_title
         );
     }
@@ -77,7 +76,7 @@ public class MyListsPageObject extends MainPageObject {
         String article_title_xpath = getFolderXpathByName(article_title);
         this.waitForArticleToAppearByTitle(article_title);
         this.swipeElementToLeft(
-                By.xpath(article_title_xpath),
+                article_title_xpath,
                 "Cannot find saved article with title " + article_title
         );
         this.waitForArticleToDisappearByTitle(article_title);
@@ -86,7 +85,7 @@ public class MyListsPageObject extends MainPageObject {
     public void clickByArticleWithSubstring(String substring) {
         String article_title_element_xpath = getSavedArticleXpathByTitle(substring);
         this.waitForElementAndClick(
-                By.xpath(article_title_element_xpath),
+                article_title_element_xpath,
                 "Cannot find and click article title with substring " + substring,
                 30);
     }
