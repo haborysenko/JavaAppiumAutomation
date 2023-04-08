@@ -4,6 +4,8 @@ import lib.CoreTestCase;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
 import org.junit.Test;
+import tests.factories.ArticlePageObjectFactory;
+import tests.factories.SearchPageObjectFactory;
 
 public class ChangeAppConditionTests extends CoreTestCase {
 
@@ -12,12 +14,12 @@ public class ChangeAppConditionTests extends CoreTestCase {
         String search_line = "Java";
         String search_result_to_click_on = "Object-oriented programming language";
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(search_line);
         SearchPageObject.clickByArticleWithSubstring(search_result_to_click_on);
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String article_title_before_rotation = ArticlePageObject.getArticleTitle();
 
@@ -43,7 +45,7 @@ public class ChangeAppConditionTests extends CoreTestCase {
         String search_line = "Java";
         String article_text_to_wait_for = "Object-oriented programming language";
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(search_line);
         SearchPageObject.waitForSearchResults(article_text_to_wait_for);

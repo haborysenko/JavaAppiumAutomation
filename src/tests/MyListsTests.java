@@ -3,6 +3,9 @@ package tests;
 import lib.CoreTestCase;
 import lib.ui.*;
 import org.junit.Test;
+import tests.factories.ArticlePageObjectFactory;
+import tests.factories.SearchPageObjectFactory;
+
 import java.util.List;
 
 public class MyListsTests extends CoreTestCase {
@@ -13,12 +16,12 @@ public class MyListsTests extends CoreTestCase {
         String search_result_to_click_on = "Object-oriented programming language";
         String folder_name = "Learning programming";
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine(search_line);
         SearchPageObject.clickByArticleWithSubstring(search_result_to_click_on);
 
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
         ArticlePageObject.addArticleToMyNewList(folder_name);
@@ -40,7 +43,7 @@ public class MyListsTests extends CoreTestCase {
         // 1. Save the first two search results to a new folder with a specified name.
         for (int i = 0; i < 2; i++) {
             // wait for search input and click on it
-            SearchPageObject SearchPageObject = new SearchPageObject(driver);
+            SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
             SearchPageObject.initSearchInput();
             SearchPageObject.typeSearchLine(search_line);
 
@@ -49,7 +52,7 @@ public class MyListsTests extends CoreTestCase {
             // get title of article 'i',  open it & wait till title is shown
             String title = titles_in_search_results.get(i);
             SearchPageObject.clickByArticleWithSubstring(title);
-            ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+            ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
             ArticlePageObject.waitForTitleElement();
 
             // for the first article (i=0) we have to create new folder, for the second - add to existing one
@@ -88,7 +91,7 @@ public class MyListsTests extends CoreTestCase {
 
         //3. Open article that is left and verify that title before and after removal are the same
         MyListsPageObject.clickByArticleWithSubstring(titles_in_my_list.get(1));
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         String article_title = ArticlePageObject.getArticleTitle();
         assertEquals(
                 "Titles are not the same",

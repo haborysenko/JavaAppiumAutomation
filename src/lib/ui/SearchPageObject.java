@@ -7,19 +7,18 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.containsString;
 
-public class SearchPageObject extends MainPageObject{
+abstract public class SearchPageObject extends MainPageObject{
 
-    private static final String
-        SEARCH_INIT_ELEMENT = "xpath://*[contains(@text,'Search Wikipedia')]",
-        SEARCH_INPUT = "xpath://*[contains(@text,'Search…')]",
-        SEARCH_CANCEL_BUTTON = "id:org.wikipedia:id/search_close_btn",
-        SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[contains(@text,'{SUBSTRING}')]",
-        SEARCH_RESULT_TITLE_DESCRIPTION_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[contains(@text,'{SUBSTRING}')]",
-        SEARCH_RESULT_ELEMENT = "id:org.wikipedia:id/page_list_item_title",
-        SEARCH_EMPTY_RESULT_ELEMENT = "xpath://*[@text='No results found']";
+    protected static String
+        SEARCH_INIT_ELEMENT,
+        SEARCH_INPUT,
+        SEARCH_CANCEL_BUTTON,
+        SEARCH_RESULT_BY_SUBSTRING_TPL,
+        SEARCH_RESULT_TITLE_DESCRIPTION_BY_SUBSTRING_TPL,
+        SEARCH_RESULT_ELEMENT,
+        SEARCH_EMPTY_RESULT_ELEMENT;
 
     public SearchPageObject(AppiumDriver driver) {
-
         super(driver);
     }
 
