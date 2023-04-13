@@ -8,6 +8,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     protected static String
             TITLE,
+            TITLE_BY_SUBSTRING_TPL,
             FOOTER_ELEMENT,
             OPTIONS_BUTTON,
             OPTIONS_ADD_TO_MY_LIST_BUTTON,
@@ -21,9 +22,23 @@ abstract public class ArticlePageObject extends MainPageObject {
         super(driver);
     }
 
+    /*TEMPLATE METHODS*/
+    private static String getTitleElementWithSubstring(String substring) {
+        return TITLE_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+    /*TEMPLATE METHODS*/
+
     public WebElement waitForTitleElement() {
         return this.waitForElementPresent(
                 TITLE,
+                "Cannot find article title on page",
+                30);
+    }
+
+    public WebElement waitForTitleElementWithSubstring(String substring) {
+        String title_element_xpath = getTitleElementWithSubstring(substring);
+        return this.waitForElementPresent(
+                title_element_xpath,
                 "Cannot find article title on page",
                 30);
     }
@@ -52,6 +67,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     }
 
+    //Android
     public void addArticleToMyNewList(String name_of_folder) {
         //more options
         this.waitForElementAndClick(
@@ -96,6 +112,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    //Android
     public void addArticleToMyExistingList(String name_of_existing_folder) {
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
@@ -114,6 +131,14 @@ abstract public class ArticlePageObject extends MainPageObject {
                 "Cannot find " + name_of_existing_folder,
                 30
         );
+    }
+
+    //iOS
+    public void addArticlesToMySaved() {
+        this.waitForElementAndClick(
+                OPTIONS_ADD_TO_MY_LIST_BUTTON,
+                "Cannot find option to add article to reading list",
+                5);
     }
 
      public void closeArticle() {

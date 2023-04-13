@@ -12,10 +12,11 @@ public class WelcomePageObject extends MainPageObject {
             STEP_LEARN_MORE_ABOUT_DATE_COLLECTED_LINK = "xpath://XCUIElementTypeStaticText[@name='Learn more about data collected']",
             NEXT_LINK = "xpath://XCUIElementTypeButton[@name='Next']",
             GET_STARTED_BUTTON = "xpath://XCUIElementTypeButton[@name='Get started']",
-            SKIP = "xpath://XCUIElementTypeButton[@name='Skip']";
+            SKIP = "xpath://XCUIElementTypeStaticText[@name='Skip']";
 
     public WelcomePageObject(AppiumDriver driver)
     {
+
         super(driver);
     }
 

@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
@@ -68,6 +69,12 @@ abstract public class SearchPageObject extends MainPageObject{
                 "Cannot find and type into search input element");
     }
 
+    public void clearSearchInputField() {
+        this.waitForElementAndClearTextField(
+                SEARCH_INPUT,
+                "Cannot clear search input");
+    }
+
     public void waitForSearchResults(String substring) {
         String search_result_element_xpath = getResultSearchElement(substring);
         this.waitForElementPresent(
@@ -99,23 +106,28 @@ abstract public class SearchPageObject extends MainPageObject{
     }
 
     public void assertThatEachTitleInSearchResultsContainSearchLine(String search_line) {
-        List<String> titles = this.waitForElementsAndGetAttribute(
-                SEARCH_RESULT_ELEMENT,
-                "text",
-                "Cannot get article title attribute",
-                30);
+        List<String> titles = this.getArticleTitlesFromSearchResults(search_line);
 
         for(String title: titles){
             Assert.assertThat(title, containsString(search_line));
         }
     }
 
-    public List<String> getArticleTitlesFromSearchResults() {
-        return this.waitForElementsAndGetAttribute(
-                SEARCH_RESULT_ELEMENT,
-                "text",
-                "Cannot get article title attribute",
-                30);
+    public List<String> getArticleTitlesFromSearchResults(String substring) {
+        String search_result_element_xpath = getResultSearchElement(substring);
+                if(Platform.getInstance().isAndroid()) {
+                    return this.waitForElementsAndGetAttribute(
+                            search_result_element_xpath,
+                            "text",
+                            "Cannot get article title attribute",
+                            30);
+                } else {
+                    return this.waitForElementsAndGetAttribute(
+                            search_result_element_xpath,
+                            "name",
+                            "Cannot get article title attribute",
+                            30);
+                }
     }
 
     public void waitForEmptyResultsLabel() {
@@ -141,7 +153,11 @@ abstract public class SearchPageObject extends MainPageObject{
 
     public String getSearchInitInputPlaceholderText() {
         WebElement search_placeholder = waitForSearchInitInput();
-        return search_placeholder.getAttribute("text");
+        if(Platform.getInstance().isAndroid()) {
+            return search_placeholder.getAttribute("text");
+        } else {
+            return search_placeholder.getAttribute("name"); //label
+        }
     }
 
     public void assertSearchInitInputPlaceholderHasExactText(String expected_placeholder) {
